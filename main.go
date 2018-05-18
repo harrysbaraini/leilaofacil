@@ -15,10 +15,10 @@ func main() {
 	r := &router.Router{
 		HttpRouter: httprouter.New(),
 	}
+
 	log.Printf("HTTP ROUTER created.")
 
-	r.InstallRoutes(apiinfo.Routes)
-	r.InstallRoutes(users.Routes)
+	installRoutes(r)
 
 	log.Printf("Routes registered.")
 
@@ -27,4 +27,9 @@ func main() {
 	}
 
 	log.Printf("Listen and serving on :3000")
+}
+
+func installRoutes(r *router.Router) {
+	r.InstallRoutes(apiinfo.Routes)
+	r.InstallRoutes(users.Routes)
 }
