@@ -1,6 +1,9 @@
 package router
 
-import "github.com/julienschmidt/httprouter"
+import (
+	"github.com/julienschmidt/httprouter"
+	"log"
+)
 
 // Route defines a route
 type Route struct {
@@ -24,6 +27,8 @@ type Router struct {
 // InstallRoutes adds a list of routes to the router
 func (r *Router) InstallRoutes(rg *RouteGroup) {
 	for _, route := range rg.Routes {
-		r.HttpRouter.Handle(rg.Prefix + route.Method, route.Pattern, route.Handler)
+		r.HttpRouter.Handle(route.Method, rg.Prefix + route.Pattern, route.Handler)
+
+		log.Printf("Route registed: " + rg.Prefix + route.Pattern)
 	}
 }
